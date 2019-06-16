@@ -23,6 +23,7 @@
     "@angular/router": "^6.0.3",
     "angular2-hotkeys": "^2.1.4",
     "core-js": "^2.5.4",
+    "express": "^4.17.1",
     "ngx-json-viewer": "^2.4.0",
     "rxjs": "^6.4.0",
     "zone.js": "^0.8.26"
