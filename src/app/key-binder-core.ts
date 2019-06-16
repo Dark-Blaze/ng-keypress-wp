@@ -1,6 +1,5 @@
 import { KeyMapper, KeyMapperData, KeyRemoverData } from './key-mapper';
 
-
 /**
  * This is a core class for implementing and interfacing with any key binding library.
  *
@@ -25,7 +24,7 @@ export class KeyBinderCore implements KeyMapper {
    * @returns {KeyBinderCore}
    * @memberof KeyBinderCore
    */
-  bind(data: KeyMapperData): KeyBinderCore {
+  public bind(data: KeyMapperData): KeyBinderCore {
     this.state.push(data);
     return this;
   }
@@ -37,7 +36,7 @@ export class KeyBinderCore implements KeyMapper {
    * @returns {KeyBinderCore}
    * @memberof KeyBinderCore
    */
-  unbind(data: KeyRemoverData): KeyBinderCore {
+  public unbind(data: KeyRemoverData): KeyBinderCore {
     this.state.splice(this.state.map((i: KeyMapperData) => {
       if (data.source === i.source)
         return i.key
@@ -51,7 +50,7 @@ export class KeyBinderCore implements KeyMapper {
    *
    * @memberof KeyBinderCore
    */
-  unbindAll(): void {
+  public unbindAll(): void {
     this.state = [];
   }
 
@@ -61,7 +60,7 @@ export class KeyBinderCore implements KeyMapper {
    * @returns {object}
    * @memberof KeyBinderCore
    */
-  getAll(): object {
+  public getAll(): object {
     const components = Array.from(new Set(this.state.map((i: KeyMapperData) => i.source)));
     let result = {};
     components.map((v, k) => {
