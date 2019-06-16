@@ -64,6 +64,7 @@ export class SampleComponentComponent implements OnInit {
    * @memberof SampleComponentComponent
    */
   assign(): void {
+    this.reset();
     this.keyboardMapper.setKeyEventListner('SampleComponentComponent', 'keydown', 'v', this.keyCallbackSample)
       .setKeyEventListner('SampleComponentComponent', 'keydown', 'a', this.keyCallbackSample)
       .setKeyEventListner('SampleComponentComponent', 'keydown', 'b', this.keyCallbackSample)
