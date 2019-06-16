@@ -77,4 +77,6 @@ button:hover {
 
 a {
   cursor: pointer;
+  color: red;
+  border-bottom: 2px solid red;
 }
