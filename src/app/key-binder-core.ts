@@ -1,12 +1,25 @@
 import { KeyMapper, KeyMapperData, KeyRemoverData } from './key-mapper';
 
 
+/**
+ * This is a core class for implementing and interfacing with any key binding library.
+ *
+ * @export
+ * @class KeyBinderCore
+ * @implements {KeyMapper}
+ */
 export class KeyBinderCore implements KeyMapper {
 
-  private state = [];
+  /**
+   * This will store the key binding properties
+   *
+   * @private
+   * @memberof KeyBinderCore
+   */
+  private state = KeyMapperData[];
 
   /**
-   * This method will help bind a new key as a shortcut.
+   * This method will bind a new key as a shortcut.
    *
    * @param {KeyMapperData} data This will contain the data for mapping the key and it's listener
    * @returns {KeyBinderCore}
@@ -17,6 +30,13 @@ export class KeyBinderCore implements KeyMapper {
     return this;
   }
 
+  /**
+   * This method will unbind a new key as a shortcut
+   *
+   * @param {KeyRemoverData} data This will contain the data for mapping the key and it's listener
+   * @returns {KeyBinderCore}
+   * @memberof KeyBinderCore
+   */
   unbind(data: KeyRemoverData): KeyBinderCore {
     this.state.splice(this.state.map((i: KeyMapperData) => {
       if (data.source === i.source)
@@ -25,7 +45,17 @@ export class KeyBinderCore implements KeyMapper {
     return this;
   }
 
+  /**
+   * This method will remove all the key bindings
+   *
+   * @memberof KeyBinderCore
+   */
   unbindAll(): void {
     this.state = [];
+  }
+
+
+  getAll(): Array<KeyMapperData> {
+    return this.state;
   }
 }
