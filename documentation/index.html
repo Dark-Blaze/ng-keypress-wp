@@ -31,19 +31,49 @@
                    <div class="content-data">
 
 <h1 id="ngkeypresswp">NgKeypressWp</h1>
-<p>This project was generated with <a href="https://github.com/angular/angular-cli">Angular CLI</a> version 6.0.8.</p>
-<h2 id="development-server">Development server</h2>
-<p>Run <code>ng serve</code> for a dev server. Navigate to <code>http://localhost:4200/</code>. The app will automatically reload if you change any of the source files.</p>
-<h2 id="code-scaffolding">Code scaffolding</h2>
-<p>Run <code>ng generate component component-name</code> to generate a new component. You can also use <code>ng generate directive|pipe|service|class|guard|interface|enum|module</code>.</p>
-<h2 id="build">Build</h2>
-<p>Run <code>ng build</code> to build the project. The build artifacts will be stored in the <code>dist/</code> directory. Use the <code>--prod</code> flag for a production build.</p>
-<h2 id="running-unit-tests">Running unit tests</h2>
-<p>Run <code>ng test</code> to execute the unit tests via <a href="https://karma-runner.github.io">Karma</a>.</p>
-<h2 id="running-end-to-end-tests">Running end-to-end tests</h2>
-<p>Run <code>ng e2e</code> to execute the end-to-end tests via <a href="http://www.protractortest.org/">Protractor</a>.</p>
-<h2 id="further-help">Further help</h2>
-<p>To get more help on the Angular CLI use <code>ng help</code> or go check out the <a href="https://github.com/angular/angular-cli/blob/master/README.md">Angular CLI README</a>.</p>
+<h2 id="architecture">Architecture</h2>
+<p>The keyBinderCore class holds the interfacing methods with any other key binding library. 
+The keyBinderService exposes a service to all the components at the module level to assign shortcuts.</p>
+<h2 id="exposed-methods">Exposed Methods</h2>
+<h3 id="keybindercore">keyBinderCore</h3>
+<p>The core exposes the following methods. This will call the binding libraries methods internally
+<code>javascript
+bind()
+unbind()
+unbindAll()
+getAll()</code></p>
+<h3 id="keybinderservice">keyBinderService</h3>
+<p>The application interfacing methods will be provided by this service which will talk to the core class&#39;s methods.</p>
+<p><code>javascript
+setKeyEventListner()
+setKeyEventListnerMap()
+destroyKeyEventListener()
+destroyAllEventLisnteners()
+getAllShortcuts()</code></p>
+<p>To change the key binding library, the core methods will need to be updated. The current library used does not support a wide variety of actions on key bindings so the type is not considered. Although the Core layer has support to pass types to any other library which supports it.</p>
+<p>The key binding library used is <code>angular2-hotkeys</code> which is very minimal</p>
+<h3 id="state">State</h3>
+<p>To fetch all the shortcuts, the core maintains a <code>state</code> variable which will return the keyboard mappings in the format below</p>
+<p><code>javascript
+  component: [{
+    source: string,
+    key: string,
+    type: string,
+    listener: any,
+    options: object,
+    description: string,
+  }]</code></p>
+<h3 id="demo">Demo:</h3>
+<p>https://keybinder.herokuapp.com/</p>
+<h3 id="documentation">Documentation:</h3>
+<p>https://dark-blaze.github.io/ng-keypress-wp/documentation/</p>
+<h2 id="to-run-it-locally">To run it locally:</h2>
+<ul>
+<li>Clone the project</li>
+<li>Execute npm i or yarn install</li>
+<li>Execute ng serve</li>
+<li>Open <code>http://localhost:4200/</code></li>
+</ul>
 
 
 
