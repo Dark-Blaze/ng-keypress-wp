@@ -16,7 +16,7 @@ export class KeyBinderCore implements KeyMapper {
    * @private
    * @memberof KeyBinderCore
    */
-  private state = KeyMapperData[];
+  private state:KeyMapperData[] = [] as Array<KeyMapperData>;
 
   /**
    * This method will bind a new key as a shortcut.
