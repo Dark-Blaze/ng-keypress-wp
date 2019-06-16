@@ -1,27 +1,63 @@
 # NgKeypressWp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
+## Architecture
 
-## Development server
+The keyBinderCore class holds the interfacing methods with any other key binding library. 
+The keyBinderService exposes a service to all the components at the module level to assign shortcuts.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Exposed Methods
 
-## Code scaffolding
+### keyBinderCore
+The core exposes the following methods. This will call the binding libraries methods internally
+```javascript
+bind()
+unbind()
+unbindAll()
+getAll()
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+### keyBinderService
+The application interfacing methods will be provided by this service which will talk to the core class's methods.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+```javascript
+setKeyEventListner()
+setKeyEventListnerMap()
+destroyKeyEventListener()
+destroyAllEventLisnteners()
+getAllShortcuts()
+```
 
-## Running unit tests
+To change the key binding library, the core methods will need to be updated. The current library used does not support a wide variety of actions on key bindings so the type is not considered. Although the Core layer has support to pass types to any other library which supports it.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+The key binding library used is `angular2-hotkeys` which is very minimal
 
-## Running end-to-end tests
+### State
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+To fetch all the shortcuts, the core maintains a `state` variable which will return the keyboard mappings in the format below
 
-## Further help
+```javascript
+  component: [{
+    source: string,
+    key: string,
+    type: string,
+    listener: any,
+    options: object,
+    description: string,
+  }]
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+### Demo:
+
+https://keybinder.herokuapp.com/
+
+### Documentation:
+
+https://dark-blaze.github.io/ng-keypress-wp/documentation/
+
+## To run it locally:
+
+- Clone the project
+- Execute npm i or yarn install
+- Execute ng serve
+- Open `http://localhost:4200/`
