@@ -1,5 +1,5 @@
 import { KeyMapper, KeyMapperData, KeyRemoverData } from './key-mapper';
-
+import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 /**
  * This is a core class for implementing and interfacing with any key binding library.
  *
@@ -9,14 +9,25 @@ import { KeyMapper, KeyMapperData, KeyRemoverData } from './key-mapper';
  */
 export class KeyBinderCore implements KeyMapper {
 
-    /**
-   * This will store the key binding properties
+  /**
+ * This will store the key binding properties
+ *
+ * @private
+ * @memberof KeyBinderCore
+ */
+  private state: KeyMapperData[] = [] as Array<KeyMapperData>;
+
+  /**
+   * This is an instance of the keypress library. This can be changed at any point
    *
    * @private
    * @memberof KeyBinderCore
    */
-  private state:KeyMapperData[] = [] as Array<KeyMapperData>;
+  private _hotkeysService = new HotkeysService({});
 
+  constructor() {
+
+  }
   /**
    * This method will bind a new key as a shortcut.
    *
@@ -25,6 +36,8 @@ export class KeyBinderCore implements KeyMapper {
    * @memberof KeyBinderCore
    */
   public bind(data: KeyMapperData): KeyBinderCore {
+    console.log(`Registering '${data.key}' from '${data.source}'`);
+    this._hotkeysService.add(new Hotkey(data.key, data.listener));
     this.state.push(data);
     return this;
   }
@@ -38,8 +51,9 @@ export class KeyBinderCore implements KeyMapper {
    */
   public unbind(data: KeyRemoverData): KeyBinderCore {
     this.state.splice(this.state.map((i: KeyMapperData) => {
-      if (data.source === i.source)
-        return i.key
+      if (data.source === i.source) {
+        return i.key;
+      }
     }).indexOf(data.key), 1);
 
     return this;
@@ -51,6 +65,7 @@ export class KeyBinderCore implements KeyMapper {
    * @memberof KeyBinderCore
    */
   public unbindAll(): void {
+    this._hotkeysService.reset();
     this.state = [];
   }
 
@@ -62,10 +77,10 @@ export class KeyBinderCore implements KeyMapper {
    */
   public getAll(): object {
     const components = Array.from(new Set(this.state.map((i: KeyMapperData) => i.source)));
-    let result = {};
+    const result = {};
     components.map((v, k) => {
       result[v] = this.state.filter(key => key.source === v);
-    })
+    });
     return result;
   }
 }

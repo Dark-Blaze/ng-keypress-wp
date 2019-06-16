@@ -24,7 +24,7 @@ export interface KeyMapperData {
   source: string;
   key: string;
   type: string;
-  listener: Function;
+  listener: any;
   options?: object;
   description?: string;
 }

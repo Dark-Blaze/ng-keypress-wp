@@ -1,3 +1,23 @@
-<p>
-  sample-component works!
-</p>
+<div class="actions">
+  <button (click)="getKeys()">Get Key bindings</button>
+  <button (click)="assign()">Assign Shortcuts</button>
+  <a (click)="reset()">Reset</a>
+</div>
+<div class="container">
+  <div class="" *ngIf="registeredKeys.length === 0">
+    No keys registered
+  </div>
+  <div class="info" *ngIf="registeredKeys.length !== 0">
+    Hit any of these keys below to see the result
+  </div>
+  <div class="key-container">
+    <div class="key" *ngFor="let k of registeredKeys">
+      {{ k }}<span class="comma">,</span>
+    </div>
+  </div>
+  <div class="state" [innerHTML]="action"></div>
+
+  <div class="viewer" *ngIf="keyMap !== {}">
+    <ngx-json-viewer [json]="keyMap"></ngx-json-viewer>
+  </div>
+</div>

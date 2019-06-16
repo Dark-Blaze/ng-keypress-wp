@@ -1,1 +1,80 @@
 /* You can add global styles to this file, and also import other style files */
+
+.container {
+  width: 50%;
+  margin: 100px auto;
+  text-align: center;
+  box-shadow: 0 1px 8px -3px rgba(0, 0, 0, 0.21);
+  font-size: 1.2em;
+  padding-top: 30px;
+  position: relative;
+}
+
+.actions {
+  width: 50%;
+  margin: 100px auto;
+  text-align: center;
+  font-size: 1.2em;
+  position: relative;
+}
+.state {
+  padding: 30px;
+  border: 1px solid #eaeaea;
+  background: #f5f5f5;
+}
+
+.key:last-child .comma {
+  display: none;
+}
+
+.key-container {
+  padding: 30px;
+  font-size: 2em;
+  color: #339982;
+}
+
+.key {
+  display: inline-block;
+  margin: 10px;
+}
+
+.highlight {
+  font-weight: 900 !important;
+  border: 3px solid red;
+  padding: 5px;
+}
+
+.code {
+  font-family: monospace !important;
+  color: rebeccapurple;
+  font-weight: bold;
+}
+
+.viewer {
+  text-align: left;
+  padding: 30px;
+}
+
+button {
+  border: none;
+  padding: 10px;
+  text-align: center;
+  background: #4b71a2;
+  color: white;
+  font-size: 1em;
+  margin-right: 10px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+button:hover {
+  background: #338599;
+}
+
+.info {
+  padding-top: 30px;
+}
+
+a {
+  cursor: pointer;
+}
