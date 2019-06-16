@@ -10,7 +10,7 @@ import { KeyMapper, KeyMapperData, KeyRemoverData } from './key-mapper';
  */
 export class KeyBinderCore implements KeyMapper {
 
-  /**
+    /**
    * This will store the key binding properties
    *
    * @private
@@ -42,6 +42,7 @@ export class KeyBinderCore implements KeyMapper {
       if (data.source === i.source)
         return i.key
     }).indexOf(data.key), 1);
+
     return this;
   }
 
@@ -54,8 +55,18 @@ export class KeyBinderCore implements KeyMapper {
     this.state = [];
   }
 
-
-  getAll(): Array<KeyMapperData> {
-    return this.state;
+  /**
+   * This method will return all the key maps
+   *
+   * @returns {object}
+   * @memberof KeyBinderCore
+   */
+  getAll(): object {
+    const components = Array.from(new Set(this.state.map((i: KeyMapperData) => i.source)));
+    let result = {};
+    components.map((v, k) => {
+      result[v] = this.state.filter(key => key.source === v);
+    })
+    return result;
   }
 }
