@@ -667,6 +667,7 @@ export class SampleComponentComponent implements OnInit {
    * @memberof SampleComponentComponent
    */
   assign(): void {
+    this.reset();
     this.keyboardMapper.setKeyEventListner(&#x27;SampleComponentComponent&#x27;, &#x27;keydown&#x27;, &#x27;v&#x27;, this.keyCallbackSample)
       .setKeyEventListner(&#x27;SampleComponentComponent&#x27;, &#x27;keydown&#x27;, &#x27;a&#x27;, this.keyCallbackSample)
       .setKeyEventListner(&#x27;SampleComponentComponent&#x27;, &#x27;keydown&#x27;, &#x27;b&#x27;, this.keyCallbackSample)
@@ -701,8 +702,8 @@ export class SampleComponentComponent implements OnInit {
 
     <div class="tab-pane fade " id="c-templateData">
         <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;actions&quot;&gt;
-  &lt;button (click)&#x3D;&quot;getKeys()&quot;&gt;Get Key bindings&lt;/button&gt;
-  &lt;button (click)&#x3D;&quot;assign()&quot;&gt;Assign Shortcuts&lt;/button&gt;
+  &lt;button (click)&#x3D;&quot;getKeys()&quot;&gt;Get key bindings&lt;/button&gt;
+  &lt;button (click)&#x3D;&quot;assign()&quot;&gt;Assign default&lt;/button&gt;
   &lt;a (click)&#x3D;&quot;reset()&quot;&gt;Reset&lt;/a&gt;
 &lt;/div&gt;
 &lt;div class&#x3D;&quot;container&quot;&gt;
@@ -763,7 +764,7 @@ export class SampleComponentComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="actions">  <button (click)="getKeys()">Get Key bindings</button>  <button (click)="assign()">Assign Shortcuts</button>  <a (click)="reset()">Reset</a></div><div class="container">  <div class="" *ngIf="registeredKeys.length === 0">    No keys registered  </div>  <div class="info" *ngIf="registeredKeys.length !== 0">    Hit any of these keys below to see the result  </div>  <div class="key-container">    <div class="key" *ngFor="let k of registeredKeys">      {{ k }}<span class="comma">,</span>    </div>  </div>  <div class="state" [innerHTML]="action"></div>  <div class="viewer" *ngIf="keyMap !== {}">    <ngx-json-viewer [json]="keyMap"></ngx-json-viewer>  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="actions">  <button (click)="getKeys()">Get key bindings</button>  <button (click)="assign()">Assign default</button>  <a (click)="reset()">Reset</a></div><div class="container">  <div class="" *ngIf="registeredKeys.length === 0">    No keys registered  </div>  <div class="info" *ngIf="registeredKeys.length !== 0">    Hit any of these keys below to see the result  </div>  <div class="key-container">    <div class="key" *ngFor="let k of registeredKeys">      {{ k }}<span class="comma">,</span>    </div>  </div>  <div class="state" [innerHTML]="action"></div>  <div class="viewer" *ngIf="keyMap !== {}">    <ngx-json-viewer [json]="keyMap"></ngx-json-viewer>  </div></div></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'SampleComponentComponent', 'selector': 'app-sample-component'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'SampleComponentComponent'};
