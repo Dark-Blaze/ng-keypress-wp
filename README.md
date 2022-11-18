@@ -53,8 +53,7 @@ https://keybinder.herokuapp.com/
 
 ### Documentation:
 
-https://dark-blaze.github.io/ng-keypress-wp/documentation/
-
+https://nikhil-varma.github.io/ng-keypress-wp/documentation/
 ## To run it locally:
 
 - Clone the project
